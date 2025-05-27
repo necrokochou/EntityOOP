@@ -1,0 +1,15 @@
+E:\.personalcode\Rider Projects\OOP Practice\EntityOOP\bin\Release\net9.0\EntityOOP.exe
+E:\.personalcode\Rider Projects\OOP Practice\EntityOOP\bin\Release\net9.0\EntityOOP.deps.json
+E:\.personalcode\Rider Projects\OOP Practice\EntityOOP\bin\Release\net9.0\EntityOOP.runtimeconfig.json
+E:\.personalcode\Rider Projects\OOP Practice\EntityOOP\bin\Release\net9.0\EntityOOP.dll
+E:\.personalcode\Rider Projects\OOP Practice\EntityOOP\bin\Release\net9.0\EntityOOP.pdb
+E:\.personalcode\Rider Projects\OOP Practice\EntityOOP\obj\Release\net9.0\EntityOOP.GeneratedMSBuildEditorConfig.editorconfig
+E:\.personalcode\Rider Projects\OOP Practice\EntityOOP\obj\Release\net9.0\EntityOOP.AssemblyInfoInputs.cache
+E:\.personalcode\Rider Projects\OOP Practice\EntityOOP\obj\Release\net9.0\EntityOOP.AssemblyInfo.cs
+E:\.personalcode\Rider Projects\OOP Practice\EntityOOP\obj\Release\net9.0\EntityOOP.csproj.CoreCompileInputs.cache
+E:\.personalcode\Rider Projects\OOP Practice\EntityOOP\obj\Release\net9.0\EntityOOP.sourcelink.json
+E:\.personalcode\Rider Projects\OOP Practice\EntityOOP\obj\Release\net9.0\EntityOOP.dll
+E:\.personalcode\Rider Projects\OOP Practice\EntityOOP\obj\Release\net9.0\refint\EntityOOP.dll
+E:\.personalcode\Rider Projects\OOP Practice\EntityOOP\obj\Release\net9.0\EntityOOP.pdb
+E:\.personalcode\Rider Projects\OOP Practice\EntityOOP\obj\Release\net9.0\EntityOOP.genruntimeconfig.cache
+E:\.personalcode\Rider Projects\OOP Practice\EntityOOP\obj\Release\net9.0\ref\EntityOOP.dll

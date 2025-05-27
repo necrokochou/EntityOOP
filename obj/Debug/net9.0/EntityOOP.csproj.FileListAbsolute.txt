@@ -12,3 +12,4 @@ E:\.personalcode\Rider Projects\OOP Practice\EntityOOP\obj\Debug\net9.0\refint\E
 E:\.personalcode\Rider Projects\OOP Practice\EntityOOP\obj\Debug\net9.0\EntityOOP.pdb
 E:\.personalcode\Rider Projects\OOP Practice\EntityOOP\obj\Debug\net9.0\EntityOOP.genruntimeconfig.cache
 E:\.personalcode\Rider Projects\OOP Practice\EntityOOP\obj\Debug\net9.0\ref\EntityOOP.dll
+E:\.personalcode\Rider Projects\OOP Practice\EntityOOP\obj\Debug\net9.0\EntityOOP.sourcelink.json

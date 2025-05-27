@@ -1,0 +1,5 @@
+E:\.personalcode\Rider Projects\OOP Practice\EntityOOP\bin\Release\net9.0\publish\EntityOOP.exe
+E:\.personalcode\Rider Projects\OOP Practice\EntityOOP\bin\Release\net9.0\publish\EntityOOP.dll
+E:\.personalcode\Rider Projects\OOP Practice\EntityOOP\bin\Release\net9.0\publish\EntityOOP.deps.json
+E:\.personalcode\Rider Projects\OOP Practice\EntityOOP\bin\Release\net9.0\publish\EntityOOP.runtimeconfig.json
+E:\.personalcode\Rider Projects\OOP Practice\EntityOOP\bin\Release\net9.0\publish\EntityOOP.pdb
