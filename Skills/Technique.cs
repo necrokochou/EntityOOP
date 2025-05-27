@@ -14,23 +14,15 @@ public abstract class Technique : Skill {
 
 
     // CONSTRUCTOR
-    public Technique() { }
+    public Technique(Warrior techniqueOwner) : base(techniqueOwner) {
+        TechniqueOwner = techniqueOwner;
+        ActionType = "execute";
+    }
 
 
     // METHODS
-    protected override void PerformSkill() {
-        Execute(Target);
-    }
-    
-    public void Execute(Entity target) {
-        Target = target;
-        
-        Console.WriteLine(TechniqueOwner.Name + " uses " + Name + " technique on " + Target.Name + ".");
+    protected override string ApplyCost() {
         TechniqueOwner.Energy.Decrease(Cost);
-        Console.WriteLine(TechniqueOwner.Name + " used " + Cost + " mana.");
-        SpellType();
-        
-        // Console.WriteLine(SpellTarget.Name);
-        Target.Health.Display();
+        return "energy";
     }
 }

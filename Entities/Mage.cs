@@ -8,6 +8,7 @@ namespace EntityOOP.Entities;
 public abstract class Mage : Entity {
     // FIELDS
     private Attribute mana;
+    
     private Spell[] spells;
     
     

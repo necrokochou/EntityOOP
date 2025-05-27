@@ -17,39 +17,20 @@ public class MageAction : Action {
     public MageAction(Mage currentEntity) : base(currentEntity) {
         Mage = currentEntity;
         Actions = ["Use Spell"];
+        ActionPrompt = "Select spell > ";
     }
     
     
     // METHODS
-    protected override void PerformAction() {
-        UseSpell();
+    protected override string SkillName(int index) {
+        return Mage.Spells[index].Name;
     }
     
-    public void UseSpell() {
-        Entity target = SelectTarget();
+    protected override int SkillCount() {
+        return Mage.Spells.Length;
+    }
 
-        for (int i = 0; i < Mage.Spells.Length; i++) {
-            if (Mage.Spells[i] is null) continue;
-            Console.WriteLine(i + 1 + " -> " + Mage.Spells[i].Name);
-        }
-
-        while (true) {
-            Console.Write("Select spell > ");
-            int input;
-            try {
-                input = int.Parse(Console.ReadLine());
-            } catch (Exception e) {
-                Console.WriteLine("Invalid input. " + e.Message);
-                continue;
-            }
-            
-            if (input < 1 || input > Mage.Spells.Length) {
-                Console.WriteLine("Invalid input.");
-                continue;
-            }
-
-            Mage.Spells[input - 1].Cast(target);
-            break;
-        }
+    protected override void PerformSkill(int index, Entity target) {
+        Mage.Spells[index].PerformSkill(target);
     }
 }

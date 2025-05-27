@@ -1,4 +1,7 @@
-﻿namespace EntityOOP;
+﻿using EntityOOP.Utils;
+
+
+namespace EntityOOP;
 
 
 public abstract class Action {
@@ -6,12 +9,15 @@ public abstract class Action {
     private Entity[] entities;
     private Entity currentEntity;
     private string[] actions;
+    
+    private string actionPrompt;
 
     
     // PROPERTIES
     public Entity[] Entities { get => entities; protected set => entities = value; }
     public Entity CurrentEntity { get => currentEntity; protected set => currentEntity = value; }
     public string[] Actions { get => actions; protected set => actions = value; }
+    protected string ActionPrompt { get => actionPrompt; set => actionPrompt = value; }
     
     
     // CONSTRUCTOR
@@ -22,9 +28,7 @@ public abstract class Action {
 
     // METHODS
     public void Turn() {
-        for (int i = 0; i < Actions.Length; i++) {
-            Console.WriteLine(i + 1 + " -> " + Actions[i]);
-        }
+        Display.DisplayOptions(Actions);
 
         while (true) {
             Console.Write("Choose action > ");
@@ -52,15 +56,43 @@ public abstract class Action {
         }
     }
 
-    protected abstract void PerformAction();
+    protected void PerformAction() {
+        Entity target = SelectTarget();
+        
+        for (int i = 0; i < SkillCount(); i++) {
+            Console.WriteLine(i + 1 + " -> " + SkillName(i));
+        }
+
+        while (true) {
+            Console.Write(ActionPrompt);
+            int input;
+            try {
+                input = int.Parse(Console.ReadLine());
+            } catch (Exception e) {
+                Console.WriteLine("Invalid input. " + e.Message);
+                continue;
+            }
+            
+            if (input < 1 || input > SkillCount()) {
+                Console.WriteLine("Invalid input.");
+                continue;
+            }
+            
+            PerformSkill(input - 1, target);
+            break;
+        }
+    }
+
+    protected abstract int SkillCount();
+    
+    protected abstract string SkillName(int index);
+    
+    protected abstract void PerformSkill(int index, Entity target);
 
     public Entity SelectTarget() {
         Entities = CurrentEntity.Entities;
         
-        for (int i = 0; i < Entities.Length; i++) {
-            if (Entities[i] is null) continue;
-            Console.WriteLine(i + 1 + " -> " + Entities[i].Name);
-        }
+        Display.DisplayOptions(Entities);
 
         while (true) {
             Console.Write("Select target > ");

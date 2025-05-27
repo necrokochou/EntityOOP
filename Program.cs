@@ -34,10 +34,15 @@ internal static class Program {
         entities[2] = new Ubel();
         entities[3] = new Stark();
 
-        foreach (Entity entity in entities) {
-            entity.Entities = entities;
-        }
+        AssignEntitiesToAll(entities);
 
         return entities;
     }
+
+    public static void AssignEntitiesToAll(Entity[] entities) {
+        foreach (Entity entity in entities) {
+            if (entity != null) entity.Entities = entities;
+        }
+    }
+
 }

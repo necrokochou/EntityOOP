@@ -14,8 +14,7 @@ public class RecoveryMagic : Spell {
     
     
     // CONSTRUCTOR
-    public RecoveryMagic(Mage spellOwner) {
-        SpellOwner = spellOwner;
+    public RecoveryMagic(Mage spellOwner) : base(spellOwner) {
         Name = "Recovery Magic";
         Heal = 15f;
         Cost = 20f;

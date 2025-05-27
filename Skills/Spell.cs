@@ -14,23 +14,15 @@ public abstract class Spell : Skill {
     
 
     // CONSTRUCTOR
-    public Spell() { }
+    public Spell(Mage spellOwner) : base(spellOwner) {
+        SpellOwner = spellOwner;
+        ActionType = "cast";
+    }
 
 
     // METHODS
-    protected override void PerformSkill() {
-        Cast(Target);
-    }
-    
-    public void Cast(Entity target) {
-        Target = target;
-        
-        Console.WriteLine(SpellOwner.Name + " casts " + Name + " spell on " + Target.Name + ".");
+    protected override string ApplyCost() {
         SpellOwner.Mana.Decrease(Cost);
-        Console.WriteLine(SpellOwner.Name + " used " + Cost + " mana.");
-        SpellType();
-        
-        // Console.WriteLine(SpellTarget.Name);
-        Target.Health.Display();
+        return "mana";
     }
 }

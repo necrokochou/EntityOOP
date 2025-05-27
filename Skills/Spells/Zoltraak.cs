@@ -14,8 +14,7 @@ public class Zoltraak : Spell {
     
     
     // CONSTRUCTOR
-    public Zoltraak(Mage spellOwner) {
-        SpellOwner = spellOwner;
+    public Zoltraak(Mage spellOwner) : base(spellOwner) {
         Name = "Zoltraak";
         Damage = 10f;
         Cost = 5f;

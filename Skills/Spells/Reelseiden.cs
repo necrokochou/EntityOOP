@@ -14,8 +14,7 @@ public class Reelseiden : Spell {
     
     
     // CONSTRUCTOR
-    public Reelseiden(Mage spellOwner) {
-        SpellOwner = spellOwner;
+    public Reelseiden(Mage spellOwner) : base(spellOwner) {
         Name = "Reelseiden";
         Damage = 30f;
         Cost = 10f;

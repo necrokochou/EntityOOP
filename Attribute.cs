@@ -21,7 +21,7 @@ public abstract class Attribute {
 
     // METHODS
     public void Display() {
-        Console.WriteLine("[" + GetType().Name + "] " + Current + "/" + Maximum);
+        Console.WriteLine("[" + GetType().Name.ToUpper() + "] " + Current + "/" + Maximum);
         AttrBar();
     }
 

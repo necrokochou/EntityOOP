@@ -14,8 +14,8 @@ public class LightningStrike : Technique {
     
     
     // CONSTRUCTOR
-    public LightningStrike(Warrior techniqueOwner) {
-        TechniqueOwner = techniqueOwner;
+    public LightningStrike(Warrior techniqueOwner) : base(techniqueOwner) {
+        Owner = techniqueOwner;
         Name = "Lightning Strike";
         Damage = 30f;
         Cost = 10f;
