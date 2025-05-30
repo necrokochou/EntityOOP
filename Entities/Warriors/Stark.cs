@@ -5,7 +5,7 @@ using EntityOOP.Skills.Techniques;
 namespace EntityOOP.Entities.Warriors;
 
 
-public class Stark : Warrior {
+public sealed class Stark : Warrior {
     // FIELDS
     
     
@@ -17,7 +17,9 @@ public class Stark : Warrior {
     // CONSTRUCTOR
     public Stark() : base("Stark", 300f, 100f) {
         Action = new WarriorAction(this);
-        Techniques = [new LightningStrike(this)];
+        Techniques = [
+            new LightningStrike(this)
+        ];
     }
     
     

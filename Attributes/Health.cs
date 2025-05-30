@@ -1,7 +1,7 @@
 ﻿namespace EntityOOP.Attributes;
 
 
-public class Health : Attribute {
+public class Health : GameFramework.Attribute {
     // FIELDS
     
     
@@ -11,9 +11,7 @@ public class Health : Attribute {
     
     
     // CONSTRUCTOR
-    public Health(float maximum) : base(maximum) { 
-        // Name = "HEALTH";
-    }
+    public Health(float maximum) : base(maximum) { }
 
 
     // METHODS

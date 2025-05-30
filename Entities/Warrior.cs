@@ -1,18 +1,19 @@
-﻿using EntityOOP.Attributes;
+﻿using EntityOOP.GameFramework;
 using EntityOOP.Skills;
+using EntityOOP.Attributes;
 
 
 namespace EntityOOP.Entities;
 
 
-public abstract class Warrior : Entity {
+public class Warrior : Entity {
     // FIELDS
-    private Attribute energy;
+    private GameFramework.Attribute energy;
     private Technique[] techniques;
     
     
     // PROPERTIES
-    public Attribute Energy { get => energy; protected set => energy = value; }
+    public GameFramework.Attribute Energy { get => energy; protected set => energy = value; }
     public Technique[] Techniques { get => techniques; protected set => techniques = value; }
     
     

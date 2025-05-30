@@ -4,7 +4,7 @@
 namespace EntityOOP.Skills.Spells;
 
 
-public class Zoltraak : Spell {
+public sealed class Zoltraak : Spell {
     // FIELDS
     
     
@@ -16,8 +16,8 @@ public class Zoltraak : Spell {
     // CONSTRUCTOR
     public Zoltraak(Mage spellOwner) : base(spellOwner) {
         Name = "Zoltraak";
-        Damage = 10f;
-        Cost = 5f;
+        Damage = 70f;
+        Cost = 50f;
         Cooldown = 1f;
         DoesDamage = true;
     }

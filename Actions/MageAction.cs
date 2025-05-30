@@ -1,10 +1,11 @@
-﻿using EntityOOP.Entities;
+﻿using EntityOOP.GameFramework;
+using EntityOOP.Entities;
 
 
 namespace EntityOOP.Actions;
 
 
-public class MageAction : Action {
+public class MageAction : GameFramework.Action {
     // FIELDS
     private Mage mage;
     
@@ -17,20 +18,16 @@ public class MageAction : Action {
     public MageAction(Mage currentEntity) : base(currentEntity) {
         Mage = currentEntity;
         Actions = ["Use Spell"];
-        ActionPrompt = "Select spell > ";
+        ActionPrompt = "spell";
     }
     
     
     // METHODS
-    protected override string SkillName(int index) {
-        return Mage.Spells[index].Name;
-    }
-    
-    protected override int SkillCount() {
-        return Mage.Spells.Length;
+    protected override Skill[] Skills() {
+        return Mage.Spells;
     }
 
     protected override void PerformSkill(int index, Entity target) {
-        Mage.Spells[index].PerformSkill(target);
+        Mage.Spells[index].Perform(target);
     }
 }

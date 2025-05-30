@@ -4,7 +4,7 @@
 namespace EntityOOP.Skills.Spells;
 
 
-public class RecoveryMagic : Spell {
+public sealed class RecoveryMagic : Spell {
     // FIELDS
     
     
@@ -16,8 +16,8 @@ public class RecoveryMagic : Spell {
     // CONSTRUCTOR
     public RecoveryMagic(Mage spellOwner) : base(spellOwner) {
         Name = "Recovery Magic";
-        Heal = 15f;
-        Cost = 20f;
+        Heal = 65f;
+        Cost = 70f;
         Cooldown = 1f;
         DoesHealing = true;
     }

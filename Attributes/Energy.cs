@@ -1,7 +1,7 @@
 ﻿namespace EntityOOP.Attributes;
 
 
-public class Energy : Attribute {
+public class Energy : GameFramework.Attribute {
     // FIELDS
     
     
@@ -11,9 +11,7 @@ public class Energy : Attribute {
     
     
     // CONSTRUCTOR
-    public Energy(float maximum) : base(maximum) {
-        // Name = GetType().Name;
-    }
+    public Energy(float maximum) : base(maximum) { }
 
 
     // METHODS

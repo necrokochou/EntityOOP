@@ -1,19 +1,19 @@
-﻿using EntityOOP.Attributes;
+﻿using EntityOOP.GameFramework;
 using EntityOOP.Skills;
+using EntityOOP.Attributes;
 
 
 namespace EntityOOP.Entities;
 
 
-public abstract class Mage : Entity {
+public class Mage : Entity {
     // FIELDS
-    private Attribute mana;
-    
+    private GameFramework.Attribute mana;
     private Spell[] spells;
     
     
     // PROPERTIES
-    public Attribute Mana { get => mana; protected set => mana = value; }
+    public GameFramework.Attribute Mana { get => mana; protected set => mana = value; }
     public Spell[] Spells { get => spells; protected set => spells = value; }
     
     

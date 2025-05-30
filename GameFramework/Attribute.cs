@@ -1,4 +1,4 @@
-﻿namespace EntityOOP;
+﻿namespace EntityOOP.GameFramework;
 
 
 public abstract class Attribute {
@@ -21,23 +21,23 @@ public abstract class Attribute {
 
     // METHODS
     public void Display() {
-        Console.WriteLine("[" + GetType().Name.ToUpper() + "] " + Current + "/" + Maximum);
+        Console.WriteLine("[" + GetType().Name.ToUpper() + "] " + Clamp(Current) + "/" + Maximum);
         AttrBar();
     }
 
-    public virtual void Increase(float amount) {
+    public void Increase(float amount) {
         Current += amount;
     }
 
-    public virtual void Decrease(float amount) {
+    public void Decrease(float amount) {
         Current -= amount;
     }
 
     private void AttrBar() {
         float maxLength = 20f;
-        int filledLength = (int) (Current / Maximum *  maxLength);
+        int filledLength = (int) (Clamp(Current) / Maximum *  maxLength);
         int emptyLength = (int) maxLength - filledLength;
-        int attrPercent = (int) (Current / Maximum * 100);
+        int attrPercent = (int) (Clamp(Current) / Maximum * 100);
         
         Console.Write(attrPercent + "%\t");
         for (int i = 0; i < filledLength; i++) {
@@ -47,5 +47,15 @@ public abstract class Attribute {
             Console.Write("-");
         }
         Console.WriteLine();
+    }
+
+    private float Clamp(float value) {
+        if (value > Maximum) {
+            return Maximum;
+        }
+        if (value < 0) {
+            return 0;
+        }
+        return value;
     }
 }

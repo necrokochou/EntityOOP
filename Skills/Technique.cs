@@ -1,4 +1,5 @@
-﻿using EntityOOP.Entities;
+﻿using EntityOOP.GameFramework;
+using EntityOOP.Entities;
 
 
 namespace EntityOOP.Skills;
@@ -16,7 +17,7 @@ public abstract class Technique : Skill {
     // CONSTRUCTOR
     public Technique(Warrior techniqueOwner) : base(techniqueOwner) {
         TechniqueOwner = techniqueOwner;
-        ActionType = "execute";
+        ActionString = "execute";
     }
 
 

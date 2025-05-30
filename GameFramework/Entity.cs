@@ -1,11 +1,11 @@
-﻿namespace EntityOOP;
+﻿namespace EntityOOP.GameFramework;
 
 
 public abstract class Entity {
     // FIELDS
     private string name;
     private Attribute health;
-
+    
     private Action action;
     
     private Entity[] entities;
@@ -24,8 +24,10 @@ public abstract class Entity {
     
     // METHODS
     public void DisplayInfo() {
+        Console.WriteLine(Name);
         Health.Display();
         DisplayUniqueStats();
+        Console.WriteLine();
     }
 
     protected abstract void DisplayUniqueStats();

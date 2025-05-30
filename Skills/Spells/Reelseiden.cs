@@ -4,7 +4,7 @@
 namespace EntityOOP.Skills.Spells;
 
 
-public class Reelseiden : Spell {
+public sealed class Reelseiden : Spell {
     // FIELDS
     
     
@@ -16,8 +16,8 @@ public class Reelseiden : Spell {
     // CONSTRUCTOR
     public Reelseiden(Mage spellOwner) : base(spellOwner) {
         Name = "Reelseiden";
-        Damage = 30f;
-        Cost = 10f;
+        Damage = 85f;
+        Cost = 75f;
         Cooldown = 1f;
         DoesDamage = true;
     }
