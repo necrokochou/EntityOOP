@@ -11,12 +11,12 @@ public sealed class Core {
     private Entity[] entities;
     private Entity[] sortedEntities;
     private Entity currentEntity;
-
-    // private Constants.Characters addedCharacters;
+    
+    private Entity[] addedCharacters = [];
     
 
     // PROPERTIES
-    // public Constants.Characters AddedCharacters { get => addedCharacters; set => addedCharacters = value; }
+    public Entity[] AddedCharacters { get => addedCharacters; set => addedCharacters = value; }
     // public int Turn { get => turn; private set => turn = value; }
     // public int CurrentTurn { get => currentTurn; private set => currentTurn = value; }
     // public Entity[] Entities { get => entities; private set => entities = value; }
@@ -65,6 +65,19 @@ public sealed class Core {
             loopCount++;
         }
     }
+
+    private void Initialize(Entity[] entities) {
+        Entity[] temp = AddedCharacters;
+        int count = AddedCharacters.Length;
+        
+        AddedCharacters = new Entity[count + 1];
+        for (int i = 0; i < temp.Length; i++) {
+            AddedCharacters[i] = temp[i];
+        }
+        //AddedCharacters[count] = entity;
+        
+        Debug.Show(AddedCharacters);
+    }
     
     private void InitializeEntities(int entityCount = 4) {
         entities = new Entity[entityCount];
@@ -74,37 +87,34 @@ public sealed class Core {
         entities[2] = new Ubel();
         entities[3] = new Stark();
 
-        AssignEntitiesToAll();
+        AssignEntitiesToAll(entities);
     }
 
-    public void AssignEntitiesToAll() {
+    public void AssignEntitiesToAll(Entity[] assignedEntities) {
         foreach (Entity entity in entities) {
-            if (entity != null) entity.Entities = entities;
-        }
-    }
-
-    private void RemoveDeadEntities() {
-        for (int i = 0; i < entities.Length; i++) {
-            if (entities[i] != null && !entities[i].IsAlive()) entities[i] = null;
+            if (entity != null) entity.Entities = assignedEntities;
         }
     }
 
     private void ReloadEntities() {
-        RemoveDeadEntities();
+        Entity[] tempEntities = entities;
+        Entity[] reloadedEntities = new Entity[tempEntities.Length];
         
-        Entity[] reloadedEntities = new Entity[entities.Length];
+        for (int i = 0; i < tempEntities.Length; i++) {
+            if (tempEntities[i] != null && !tempEntities[i].IsAlive())
+                tempEntities[i] = null;
+        }
+        
         int index = 0;
-        for (int i = 0; i < reloadedEntities.Length; i++) {
-            if (entities[i] == null) continue;
+        for (int i = 0; i < tempEntities.Length; i++) {
+            if (tempEntities[i] == null) continue;
             
-            reloadedEntities[index] = entities[i];
+            reloadedEntities[index] = tempEntities[i];
             index++;
         }
+        
         sortedEntities = reloadedEntities;
-
-        foreach (Entity entity in entities) {
-            if (entity != null) entity.Entities = sortedEntities;
-        }
+        AssignEntitiesToAll(sortedEntities);
     }
 
     private int GetAliveCount() {

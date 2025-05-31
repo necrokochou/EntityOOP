@@ -18,7 +18,7 @@ public sealed class Custom {
 
     // PROPERTIES
     public Entity[] CustomEntities { get => customEntities; private set => customEntities = value; }
-
+    
 
     // CONSTRUCTOR
     public Custom() { }
@@ -63,15 +63,13 @@ public sealed class Custom {
     }
 
     private void AddCustomEntity(Entity custom) {
-        Entity[] temp = customEntities;
-        int count = customEntities.Length;
+        Entity[] temp = CustomEntities;
+        int count = CustomEntities.Length;
         
-        customEntities = new Entity[count + 1];
+        CustomEntities = new Entity[count + 1];
         for (int i = 0; i < temp.Length; i++) {
-            customEntities[i] = temp[i];
+            CustomEntities[i] = temp[i];
         }
-        customEntities[count] = custom;
-        
-        Debug.Show(customEntities);
+        CustomEntities[count] = custom;
     }
 }
