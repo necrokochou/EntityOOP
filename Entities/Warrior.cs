@@ -1,18 +1,20 @@
-﻿using EntityOOP.Attributes;
+﻿using EntityOOP.Actions;
+using EntityOOP.GameFramework;
 using EntityOOP.Skills;
+using EntityOOP.Attributes;
 
 
 namespace EntityOOP.Entities;
 
 
-public abstract class Warrior : Entity {
+public class Warrior : Entity {
     // FIELDS
-    private Attribute energy;
+    private GameFramework.Attribute energy;
     private Technique[] techniques;
     
     
     // PROPERTIES
-    public Attribute Energy { get => energy; protected set => energy = value; }
+    public GameFramework.Attribute Energy { get => energy; protected set => energy = value; }
     public Technique[] Techniques { get => techniques; protected set => techniques = value; }
     
     
@@ -22,11 +24,17 @@ public abstract class Warrior : Entity {
         Name = name;
         Health = new Health(health);
         Energy = new Energy(energy);
+        Action = new WarriorAction(this);
+        Techniques = [];
     }
 
     
     // METHODS
     protected override void DisplayUniqueStats() {
         Energy.Display();
+    }
+
+    protected override void SetSkills(Skill[] skills) {
+        Techniques = (Technique[]) skills;
     }
 }

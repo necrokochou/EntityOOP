@@ -1,4 +1,5 @@
-﻿using EntityOOP.Entities;
+﻿using EntityOOP.GameFramework;
+using EntityOOP.Entities;
 
 
 namespace EntityOOP.Skills;
@@ -16,7 +17,7 @@ public abstract class Spell : Skill {
     // CONSTRUCTOR
     public Spell(Mage spellOwner) : base(spellOwner) {
         SpellOwner = spellOwner;
-        ActionType = "cast";
+        ActionString = "cast";
     }
 
 

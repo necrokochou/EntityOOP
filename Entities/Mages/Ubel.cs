@@ -1,11 +1,10 @@
-﻿using EntityOOP.Actions;
-using EntityOOP.Skills.Spells;
+﻿using EntityOOP.Skills.Spells;
 
 
 namespace EntityOOP.Entities.Mages;
 
 
-public class Ubel : Mage {
+public sealed class Ubel : Mage {
     // FIELDS
     
     
@@ -16,8 +15,9 @@ public class Ubel : Mage {
     
     // CONSTRUCTOR
     public Ubel() : base("Ubel", 150f, 120f) {
-        Action = new MageAction(this);
-        Spells = [new Reelseiden(this)];
+        Spells = [
+            new Reelseiden(this)
+        ];
     }
     
     

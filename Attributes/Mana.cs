@@ -1,7 +1,7 @@
 ﻿namespace EntityOOP.Attributes;
 
 
-public class Mana : Attribute {
+public class Mana : GameFramework.Attribute {
     // FIELDS
     
     
@@ -11,9 +11,7 @@ public class Mana : Attribute {
     
     
     // CONSTRUCTOR
-    public Mana(float maximum) : base(maximum) { 
-        // Name = "MANA";
-    }
+    public Mana(float maximum) : base(maximum) { }
 
 
     // METHODS

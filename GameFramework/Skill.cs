@@ -1,4 +1,7 @@
-﻿namespace EntityOOP;
+﻿using EntityOOP.Utils;
+
+
+namespace EntityOOP.GameFramework;
 
 
 public abstract class Skill {
@@ -14,7 +17,7 @@ public abstract class Skill {
     private bool doesDamage;
     private bool doesHealing;
 
-    private string actionType;
+    private string actionString;
     //private string costType;
 
 
@@ -29,7 +32,7 @@ public abstract class Skill {
     public float Cooldown { get => cooldown; protected set => cooldown = value; }
     protected bool DoesDamage { get => doesDamage; set => doesDamage = value; }
     protected bool DoesHealing { get => doesHealing; set => doesHealing = value; }
-    protected string ActionType { get => actionType; set => actionType = value; }
+    protected string ActionString { get => actionString; set => actionString = value; }
     //protected string CostType { get => costType; set => costType = value; }
     
 
@@ -40,16 +43,33 @@ public abstract class Skill {
 
 
     // METHODS
-    public void PerformSkill(Entity target) {
+    public void Perform(Entity target) {
         Target = target;
+
+        string pastTense;
+        switch (ActionString[^1]) {
+            case 'a' :
+            case 'e' :
+            case 'i' :
+            case 'o' :
+            case 'u' :
+                pastTense = "d ";
+                break;
+            default:
+                pastTense = "ed ";
+                break;
+        }
         
         string skillType = GetType().BaseType.Name.ToLower();
-        Console.WriteLine(Owner.Name + " " + ActionType + "ed " + Name + " " + skillType + " on " + Target.Name + ".");
+        string skillAction = Owner.Name + " " + ActionString + pastTense + Name + " " + skillType;
+        Console.Write(skillAction + " on " + Target.Name + ".");
         string costType = ApplyCost();
-        Console.WriteLine(Owner.Name + " used " + Cost + " " + costType + ".");
+        Console.Write(Owner.Name + " used " + Cost + " " + costType + ".");
         SkillType();
         
         Target.Health.Display();
+            
+        Input.PressAnyKey();
     }
 
     protected abstract string ApplyCost();
@@ -57,6 +77,8 @@ public abstract class Skill {
     protected void SkillType() {
         if (DoesDamage) DoDamage();
         if (doesHealing) DoHeal();
+            
+        Input.PressAnyKey();
     }
 
     protected void DoDamage() {
@@ -66,6 +88,6 @@ public abstract class Skill {
 
     protected void DoHeal() {
         Target.Health.Increase(Heal);
-        Console.WriteLine(Target.Name + " gained " + Heal + " health.");   
+        Console.WriteLine(Target.Name + " gained " + Heal + " health.");
     }
 }

@@ -1,19 +1,20 @@
-﻿using EntityOOP.Attributes;
+﻿using EntityOOP.Actions;
+using EntityOOP.GameFramework;
 using EntityOOP.Skills;
+using EntityOOP.Attributes;
 
 
 namespace EntityOOP.Entities;
 
 
-public abstract class Mage : Entity {
+public class Mage : Entity {
     // FIELDS
-    private Attribute mana;
-    
+    private GameFramework.Attribute mana;
     private Spell[] spells;
     
     
     // PROPERTIES
-    public Attribute Mana { get => mana; protected set => mana = value; }
+    public GameFramework.Attribute Mana { get => mana; protected set => mana = value; }
     public Spell[] Spells { get => spells; protected set => spells = value; }
     
     
@@ -22,11 +23,17 @@ public abstract class Mage : Entity {
         Name = name;
         Health = new Health(health);
         Mana = new Mana(mana);
+        Action = new MageAction(this);
+        Spells = [];
     }
     
 
     // METHODS
     protected override void DisplayUniqueStats() {
         Mana.Display();
+    }
+
+    protected override void SetSkills(Skill[] skills) {
+        Spells = (Spell[]) skills;
     }
 }

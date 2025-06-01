@@ -1,11 +1,10 @@
-﻿using EntityOOP.Actions;
-using EntityOOP.Skills.Spells;
+﻿using EntityOOP.Skills.Spells;
 
 
 namespace EntityOOP.Entities.Mages;
 
 
-public class Frieren : Mage {
+public sealed class Frieren : Mage {
     // FIELDS
     
     
@@ -16,8 +15,9 @@ public class Frieren : Mage {
     
     // CONSTRUCTOR
     public Frieren() : base("Frieren", 200f, 500f) {
-        Action = new MageAction(this);
-        Spells = [new Zoltraak(this)];
+        Spells = [
+            new Zoltraak(this)
+        ];
     }
     
     

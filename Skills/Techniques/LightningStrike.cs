@@ -4,7 +4,7 @@
 namespace EntityOOP.Skills.Techniques;
 
 
-public class LightningStrike : Technique {
+public sealed class LightningStrike : Technique {
     // FIELDS
     
     
@@ -17,8 +17,8 @@ public class LightningStrike : Technique {
     public LightningStrike(Warrior techniqueOwner) : base(techniqueOwner) {
         Owner = techniqueOwner;
         Name = "Lightning Strike";
-        Damage = 30f;
-        Cost = 10f;
+        Damage = 70f;
+        Cost = 20f;
         Cooldown = 1f;
         DoesDamage = true;
     }

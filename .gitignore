@@ -4,3 +4,7 @@
 
 # IDE settings
 /.idea/
+
+# My files
+/Properties/
+/EntityOOP.sln.DotSettings.user

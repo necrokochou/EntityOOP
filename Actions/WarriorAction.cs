@@ -1,10 +1,11 @@
-﻿using EntityOOP.Entities;
+﻿using EntityOOP.GameFramework;
+using EntityOOP.Entities;
 
 
 namespace EntityOOP.Actions;
 
 
-public class WarriorAction : Action {
+public class WarriorAction : GameFramework.Action {
     // FIELDS
     private Warrior warrior;
     
@@ -17,20 +18,16 @@ public class WarriorAction : Action {
     public WarriorAction(Warrior currentEntity) : base(currentEntity) {
         Warrior = currentEntity;
         Actions = ["Use Moves"];
-        ActionPrompt = "Select technique > ";
+        ActionPrompt = "technique";
     }
     
     
     // METHODS
-    protected override string SkillName(int index) {
-        return Warrior.Techniques[index].Name;
-    }
-    
-    protected override int SkillCount() {
-        return Warrior.Techniques.Length;
+    protected override Skill[] Skills() {
+        return Warrior.Techniques;
     }
 
     protected override void PerformSkill(int index, Entity target) {
-        Warrior.Techniques[index].PerformSkill(target);
+        Warrior.Techniques[index].Perform(target);
     }
 }
