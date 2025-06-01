@@ -67,10 +67,10 @@ public abstract class Action {
 
         int input;
         while (true) {
-            input = Input.Select(Entities.Length, "Select target > ", true);
+            input = Input.Select(Entities.Length, "target", true);
 
             if (Entities[input] == CurrentEntity) {
-                Console.WriteLine("Cannot target yourself.");
+                Console.WriteLine("Cannot target yourself.\n");
                 continue;
             }
 

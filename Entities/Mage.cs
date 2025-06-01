@@ -1,4 +1,5 @@
-﻿using EntityOOP.GameFramework;
+﻿using EntityOOP.Actions;
+using EntityOOP.GameFramework;
 using EntityOOP.Skills;
 using EntityOOP.Attributes;
 
@@ -22,11 +23,17 @@ public class Mage : Entity {
         Name = name;
         Health = new Health(health);
         Mana = new Mana(mana);
+        Action = new MageAction(this);
+        Spells = [];
     }
     
 
     // METHODS
     protected override void DisplayUniqueStats() {
         Mana.Display();
+    }
+
+    protected override void SetSkills(Skill[] skills) {
+        Spells = (Spell[]) skills;
     }
 }

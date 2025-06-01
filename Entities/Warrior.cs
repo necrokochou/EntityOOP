@@ -1,4 +1,5 @@
-﻿using EntityOOP.GameFramework;
+﻿using EntityOOP.Actions;
+using EntityOOP.GameFramework;
 using EntityOOP.Skills;
 using EntityOOP.Attributes;
 
@@ -23,11 +24,17 @@ public class Warrior : Entity {
         Name = name;
         Health = new Health(health);
         Energy = new Energy(energy);
+        Action = new WarriorAction(this);
+        Techniques = [];
     }
 
     
     // METHODS
     protected override void DisplayUniqueStats() {
         Energy.Display();
+    }
+
+    protected override void SetSkills(Skill[] skills) {
+        Techniques = (Technique[]) skills;
     }
 }

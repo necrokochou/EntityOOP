@@ -8,22 +8,28 @@ namespace EntityOOP.GameFramework;
 
 public class MainMenu {
     // FIELDS
+    Core game = new Core();
     Custom custom = new Custom();
     private static string[] mainOptions = ["Play", "Pre-made characters", "Create custom character", "Exit"];
     private string[] preMadeOptions = ["Add character", "Remove character", "Back"];
+    
     private Entity[] initialEntities = [];
-
     private string[] characters;
-    private bool[] added;
+    private string[] charDict;
 
 
     // PROPERTIES
-    private string[] Characters { get => characters; }
+    
 
 
     // CONSTRUCTOR
     public MainMenu() {
-        characters = Constants.ENTITIES;
+        characters = new string[Constants.ENTITIES.Length];
+        charDict = new string[Constants.ENTITIES.Length];
+        for (int i = 0; i < Constants.ENTITIES.Length; i++) {
+            characters[i] = Constants.ENTITIES[i];
+            charDict[i] = Constants.ENTITIES[i];
+        }
     }
 
 
@@ -35,18 +41,17 @@ public class MainMenu {
 
             switch (input + 1) {
                 case 1 :
-                    // game.AddedCharacters = selected;
-                    InitializeCustom();
-                    Debug.Show(initialEntities);
-                    Console.ReadKey();
-                    Core game = new Core();
+                    //InitializeAll();
+                    // Debug.Show(initialEntities);
+                    // Console.ReadKey();
+                    game.Initialize(initialEntities);
                     game.Run();
                     break;
                 case 2 :
                     PreMadeCharacters();
                     break;
                 case 3 :
-                    custom.Create();
+                    Initialize(custom.Create());
                     break;
                 case 4 :
                     Console.WriteLine("Exiting...");
@@ -56,6 +61,7 @@ public class MainMenu {
                     Console.WriteLine("Invalid input. Try again.");
                     continue;
             }
+            Console.WriteLine();
         }
     }
 
@@ -77,6 +83,7 @@ public class MainMenu {
                     Console.WriteLine("Invalid input. Try again.");
                     continue;
             }
+            Console.WriteLine();
         }
     }
 
@@ -92,127 +99,141 @@ public class MainMenu {
     }
 
     private void AddCharacter() {
-        while (true) {
-            Display.Options(characters);
-            int input = Input.Select(characters.Length, "character", true);
-            
-            Initialize(CharDict(characters[input]));
-            ReloadCharDict(characters[input]);
-
-            break;
-        }
-    }
-
-    private void ReloadCharDict(string name) {
-        for (int i = 0; i < characters.Length; i++) {
-            if (characters[i] != null && characters[i] == name)
-                characters[i] = null;
+        if (charDict.Length == 0) {
+            Console.WriteLine("No characters available to add.");
+            return;
         }
         
-        string[] reloadedCharDict = new string[characters.Length];
+        Display.Options(charDict);
+        int input = Input.Select(charDict.Length, "character", true);
+        
+        Console.WriteLine("Added " + charDict[input] + " to the list.\n");
+        Initialize(CharDict(charDict[input]));
+        RemoveFromCharDict(charDict[input]);
+    }
+
+    private void RemoveCharacter() {
+        if (initialEntities.Length == 0) {
+            Console.WriteLine("No characters available to remove.\n");
+            return;
+        }
+        
+        Display.Options(initialEntities);
+        int input = Input.Select(initialEntities.Length, "character", true);
+        
+        Entity[] temp = new Entity[initialEntities.Length - 1];
         int index = 0;
-        for (int i = 0; i < reloadedCharDict.Length; i++) {
-            if (characters[i] == null) continue;
+        for (int i = 0; i < initialEntities.Length; i++) {
+            if (i == input) continue;
             
-            reloadedCharDict[index] = characters[i];
+            temp[index] = initialEntities[i];
             index++;
         }
         
-        characters = reloadedCharDict;
+        Console.WriteLine("Removed " + initialEntities[input].Name + " from the list.\n");
+        AddToCharDict(initialEntities[input].Name);
+        initialEntities = temp;
     }
 
-    private void Initialize(Entity entity) {
-        Entity[] temp = initialEntities;
-        int count = initialEntities.Length;
-        
-        initialEntities = new Entity[count + 1];
-        for (int i = 0; i < initialEntities.Length && i < temp.Length; i++) {
-            initialEntities[i] = temp[i];
+    private bool IsInCharDict(string name) {
+        for (int i = 0; i < characters.Length; i++) {
+            if (characters[i] == name) return true;
         }
         
-        initialEntities[count] = entity;
+        return false;
     }
 
-    private void InitializeCustom() {
-        Entity[] tempInitial = initialEntities;
-        Entity[] tempCustom = custom.CustomEntities;
-        
-        int count = initialEntities.Length + custom.CustomEntities.Length;
-        if (tempInitial.Length + tempCustom.Length != count) return;
-        
-        initialEntities = new Entity[count];
-        for (int i = 0; i < tempInitial.Length; i++) {
-            initialEntities[i] = tempInitial[i];
+    private void AddToCharDict(string name) {
+        string[] temp = new string[charDict.Length + 1];
+        int index = 0;
+    
+        for (int i = 0; i < charDict.Length; i++) {
+            temp[index] = charDict[i];
+            index++;
         }
-        for (int i = 0; i < tempCustom.Length; i++) {
-            initialEntities[i + tempInitial.Length] = tempCustom[i];
+    
+        int insertPos = 0;
+        int newPos = -1;
+        for (int i = 0; i < characters.Length; i++) {
+            if (characters[i] == name) {
+                newPos = i;
+                break;
+            }
         }
+    
+        for (int i = 0; i < index; i++) {
+            int currentPos = -1;
+            for (int j = 0; j < characters.Length; j++) {
+                if (characters[j] == temp[i]) {
+                    currentPos = j;
+                    break;
+                }
+            }
+            if (currentPos > newPos) {
+                insertPos = i;
+                break;
+            }
+            insertPos = i + 1;
+        }
+    
+        for (int i = index; i > insertPos; i--) {
+            temp[i] = temp[i - 1];
+        }
+    
+        temp[insertPos] = name;
+    
+        string[] newCharDict = new string[index + 1];
+        for (int i = 0; i < newCharDict.Length; i++) {
+            newCharDict[i] = temp[i];
+        }
+    
+        charDict = newCharDict;
     }
     
-    private void RemoveCharacter() { }
+    private void RemoveFromCharDict(string name) {
+        int count = 0;
+        for (int i = 0; i < charDict.Length; i++) {
+            if (charDict[i] != name) count++;
+        }
+    
+        if (count == 0) {
+            charDict = [];
+            return;
+        }
+    
+        string[] temp = new string[count];
+        int index = 0;
+        for (int i = 0; i < charDict.Length; i++) {
+            if (charDict[i] == name) continue;
+            temp[index] = charDict[i];
+            index++;
+        }
+    
+        charDict = temp;
+    }
+    
+    private void Initialize(Entity entity) {
+        Entity[] temp = new Entity[initialEntities.Length + 1];
+        for (int i = 0; i < initialEntities.Length; i++) {
+            temp[i] = initialEntities[i];
+        }
+        temp[initialEntities.Length] = entity;
+        initialEntities = temp;
+    }
 
-    // private void AddCharacter() {
-    //     ModifySelected(true);
-    // }
-    //
-    // private void RemoveCharacter() {
-    //     ModifySelected(false);
-    // }
-    //
-    // private void ModifySelected(bool add) {
-    //     while (true) {
-    //         int input = Input.Select(4, "character");
-    //
-    //         Constants.Characters character;
-    //         string name;
-    //
-    //         switch (input + 1) {
-    //             case 1:
-    //                 character = Constants.Characters.Frieren;
-    //                 name = "Frieren";
-    //                 break;
-    //             case 2:
-    //                 character = Constants.Characters.Fern;
-    //                 name = "Fern";
-    //                 break;
-    //             case 3:
-    //                 character = Constants.Characters.Ubel;
-    //                 name = "Ubel";
-    //                 break;
-    //             case 4:
-    //                 character = Constants.Characters.Stark;
-    //                 name = "Stark";
-    //                 break;
-    //             default:
-    //                 continue;
-    //         }
-    //
-    //         if (add) {
-    //             selected |= character;
-    //             Console.WriteLine($"Added {name}.");
-    //         } else {
-    //             selected &= ~character;
-    //             Console.WriteLine($"Removed {name}.");
-    //         }
-    //
-    //         break;
+    // private void InitializeAll() {
+    //     Entity[] tempInitial = initialEntities;
+    //     Entity[] tempCustom = custom.CustomEntities;
+    //     int count = initialEntities.Length + custom.CustomEntities.Length;
+    //     
+    //     if (tempInitial.Length + tempCustom.Length != count) return;
+    //     
+    //     initialEntities = new Entity[count];
+    //     for (int i = 0; i < tempInitial.Length; i++) {
+    //         initialEntities[i] = tempInitial[i];
     //     }
-    // }
-    //
-    // public void AddCharacters() {
-    //     while (true) {
-    //         int input = Input.Select(addOptions.Length, "option");
-    //         
-    //         switch (input + 1) {
-    //             case 1 :
-    //                 AddCharacter();
-    //                 break;
-    //             case 2 :
-    //                 RemoveCharacter();
-    //                 break;
-    //             default:
-    //                 continue;
-    //         }
+    //     for (int i = 0; i < tempCustom.Length; i++) {
+    //         initialEntities[i + tempInitial.Length] = tempCustom[i];
     //     }
     // }
 }

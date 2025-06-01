@@ -1,5 +1,4 @@
-﻿using EntityOOP.Actions;
-using EntityOOP.Skills.Techniques;
+﻿using EntityOOP.Skills.Techniques;
 
 
 namespace EntityOOP.Entities.Warriors;
@@ -16,7 +15,6 @@ public sealed class Stark : Warrior {
     
     // CONSTRUCTOR
     public Stark() : base("Stark", 300f, 100f) {
-        Action = new WarriorAction(this);
         Techniques = [
             new LightningStrike(this)
         ];

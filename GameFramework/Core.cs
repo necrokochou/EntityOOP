@@ -12,15 +12,9 @@ public sealed class Core {
     private Entity[] sortedEntities;
     private Entity currentEntity;
     
-    private Entity[] addedCharacters = [];
-    
 
     // PROPERTIES
-    public Entity[] AddedCharacters { get => addedCharacters; set => addedCharacters = value; }
-    // public int Turn { get => turn; private set => turn = value; }
-    // public int CurrentTurn { get => currentTurn; private set => currentTurn = value; }
-    // public Entity[] Entities { get => entities; private set => entities = value; }
-    // public Entity CurrentEntity { get => currentEntity; private set => currentEntity = value; }
+    
     
     
     // CONSTRUCTOR
@@ -29,7 +23,6 @@ public sealed class Core {
 
     // METHODS
     public void Run() {
-        InitializeEntities();
         Loop();
     }
     
@@ -43,7 +36,7 @@ public sealed class Core {
             ReloadEntities();
 
             if (GetAliveCount() <= 1) {
-                Console.WriteLine(sortedEntities[0].Name + " has won this battle.");
+                Console.WriteLine(sortedEntities[0].Name + " has won this battle.\n");
                 break;
             }
             Console.Clear();
@@ -66,27 +59,10 @@ public sealed class Core {
         }
     }
 
-    private void Initialize(Entity[] entities) {
-        Entity[] temp = AddedCharacters;
-        int count = AddedCharacters.Length;
+    public void Initialize(Entity[] initialEntities) {
+        entities = new Entity[initialEntities.Length];
+        entities = initialEntities;
         
-        AddedCharacters = new Entity[count + 1];
-        for (int i = 0; i < temp.Length; i++) {
-            AddedCharacters[i] = temp[i];
-        }
-        //AddedCharacters[count] = entity;
-        
-        Debug.Show(AddedCharacters);
-    }
-    
-    private void InitializeEntities(int entityCount = 4) {
-        entities = new Entity[entityCount];
-
-        entities[0] = new Frieren();
-        entities[1] = new Fern();
-        entities[2] = new Ubel();
-        entities[3] = new Stark();
-
         AssignEntitiesToAll(entities);
     }
 

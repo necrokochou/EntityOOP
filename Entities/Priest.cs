@@ -23,4 +23,6 @@ public  class Priest : Entity {
 
     // METHODS
     protected override void DisplayUniqueStats() { }
+    
+    protected override void SetSkills(Skill[] skills) { }
 }
