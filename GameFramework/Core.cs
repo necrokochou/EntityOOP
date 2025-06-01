@@ -60,8 +60,24 @@ public sealed class Core {
     }
 
     public void Initialize(Entity[] initialEntities) {
+        if (initialEntities.Length == 0) {
+            DefaultInitialization();
+            return;
+        }
+        
         entities = new Entity[initialEntities.Length];
         entities = initialEntities;
+        
+        AssignEntitiesToAll(entities);
+    }
+
+    private void DefaultInitialization(int entityCount = 4) {
+        entities = new Entity[entityCount];
+        
+        entities[0] = new Frieren();
+        entities[1] = new Fern();
+        entities[2] = new Ubel();
+        entities[3] = new Stark();
         
         AssignEntitiesToAll(entities);
     }
