@@ -36,7 +36,7 @@ public sealed class Core {
             ReloadEntities();
 
             if (GetAliveCount() <= 1) {
-                Console.WriteLine(sortedEntities[0].Name + " has won this battle.\n");
+                Console.Write(sortedEntities[0].Name + " has won this battle.");
                 break;
             }
             Console.Clear();
@@ -51,11 +51,11 @@ public sealed class Core {
             Console.WriteLine("Turn : " + (loopCount + 1) + "\n");
             currentEntity.DisplayInfo();
             currentEntity.Action.Turn();
-            
-            Console.ReadKey();
 
             turn++;
             loopCount++;
+        
+            Input.PressAnyKey();
         }
     }
 

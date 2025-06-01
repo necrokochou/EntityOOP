@@ -63,19 +63,23 @@ public abstract class Action {
     public Entity SelectTarget() {
         Entities = CurrentEntity.Entities;
         
-        Display.Options(Entities);
-
         int input;
         while (true) {
+            Display.Options(Entities);
             input = Input.Select(Entities.Length, "target", true);
 
             if (Entities[input] == CurrentEntity) {
-                Console.WriteLine("Cannot target yourself.\n");
+                Console.Write("Cannot target yourself.");
+            
+                Input.PressAnyKey();
                 continue;
             }
 
             break;
         }
+        
+        Console.Write("Targeted " + Entities[input].Name + ".");
+        Input.PressAnyKey();
         
         return Entities[input];
     }

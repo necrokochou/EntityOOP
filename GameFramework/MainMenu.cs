@@ -54,14 +54,17 @@ public class MainMenu {
                     Initialize(custom.Create());
                     break;
                 case 4 :
-                    Console.WriteLine("Exiting...");
+                    Console.Write("Exiting...");
+            
+                    Input.PressAnyKey();
                     Environment.Exit(0);
                     break;
                 default :
-                    Console.WriteLine("Invalid input. Try again.");
+                    Console.Write("Invalid input. Try again.");
+            
+                    Input.PressAnyKey();
                     continue;
             }
-            Console.WriteLine();
         }
     }
 
@@ -80,10 +83,11 @@ public class MainMenu {
                 case 3 :
                     return;
                 default:
-                    Console.WriteLine("Invalid input. Try again.");
+                    Console.Write("Invalid input. Try again.");
+            
+                    Input.PressAnyKey();
                     continue;
             }
-            Console.WriteLine();
         }
     }
 
@@ -100,21 +104,23 @@ public class MainMenu {
 
     private void AddCharacter() {
         if (charDict.Length == 0) {
-            Console.WriteLine("No characters available to add.");
+            Console.Write("No characters available to add.");
             return;
         }
         
         Display.Options(charDict);
         int input = Input.Select(charDict.Length, "character", true);
         
-        Console.WriteLine("Added " + charDict[input] + " to the list.\n");
+        Console.Write("Added " + charDict[input] + " to the list.");
         Initialize(CharDict(charDict[input]));
         RemoveFromCharDict(charDict[input]);
+        
+        Input.PressAnyKey();
     }
 
     private void RemoveCharacter() {
         if (initialEntities.Length == 0) {
-            Console.WriteLine("No characters available to remove.\n");
+            Console.Write("No characters available to remove.");
             return;
         }
         
@@ -130,17 +136,11 @@ public class MainMenu {
             index++;
         }
         
-        Console.WriteLine("Removed " + initialEntities[input].Name + " from the list.\n");
+        Console.WriteLine("Removed " + initialEntities[input].Name + " from the list.");
         AddToCharDict(initialEntities[input].Name);
         initialEntities = temp;
-    }
-
-    private bool IsInCharDict(string name) {
-        for (int i = 0; i < characters.Length; i++) {
-            if (characters[i] == name) return true;
-        }
         
-        return false;
+        Input.PressAnyKey();
     }
 
     private void AddToCharDict(string name) {
@@ -220,20 +220,4 @@ public class MainMenu {
         temp[initialEntities.Length] = entity;
         initialEntities = temp;
     }
-
-    // private void InitializeAll() {
-    //     Entity[] tempInitial = initialEntities;
-    //     Entity[] tempCustom = custom.CustomEntities;
-    //     int count = initialEntities.Length + custom.CustomEntities.Length;
-    //     
-    //     if (tempInitial.Length + tempCustom.Length != count) return;
-    //     
-    //     initialEntities = new Entity[count];
-    //     for (int i = 0; i < tempInitial.Length; i++) {
-    //         initialEntities[i] = tempInitial[i];
-    //     }
-    //     for (int i = 0; i < tempCustom.Length; i++) {
-    //         initialEntities[i + tempInitial.Length] = tempCustom[i];
-    //     }
-    // }
 }

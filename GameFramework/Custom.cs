@@ -9,10 +9,8 @@ namespace EntityOOP.GameFramework;
 
 public sealed class Custom {
     // FIELDS
-    private Entity customEntity;
     private string name;
     private string classType;
-    private string[] skills;
     private int maxSkillCount;
     
     private string[] spellsDict;
@@ -35,8 +33,6 @@ public sealed class Custom {
         for (int i = 0; i < techniquesDict.Length; i++) {
             techniquesDict[i] = Constants.TECHNIQUES[i];
         }
-
-        skills = new string[maxSkillCount];
     }
 
 
@@ -53,26 +49,42 @@ public sealed class Custom {
         switch (classType) {
             case "Mage" :
                 customEntity = new Mage(name, 100f, 100f);
-                InitializeSkills((Mage) customEntity);
+                AddSkills((Mage) customEntity);
                 break;
             case "Warrior" :
                 customEntity = new Warrior(name, 100f, 100f);
-                InitializeSkills((Warrior) customEntity);
+                AddSkills((Warrior) customEntity);
                 break;
             case "Priest" :
                 customEntity = new Priest(name, 100f);
-                InitializeSkills((Priest) customEntity);
+                AddSkills((Priest) customEntity);
                 break;
         }
+            
+        Input.PressAnyKey();
+        
+        Console.Write("Created " + classType + " " + customEntity.Name + ".");
+        Input.PressAnyKey();
         
         return customEntity;
     }
+
+    private void AddSkills(Entity entity, bool useMaxSkillCount = true) {
+        switch (entity) {
+            case Mage mage : InitializeSkills(mage, useMaxSkillCount); break;
+            case Warrior warrior : InitializeSkills(warrior, useMaxSkillCount); break;
+            case Priest priest : InitializeSkills(priest, useMaxSkillCount); break;
+        }
+    }
     
-    private void InitializeSkills(Mage mage) {
-        AddSkills(spellsDict);
+    private void InitializeSkills(Mage mage, bool useMaxSkillCount) {
+        if (!useMaxSkillCount || maxSkillCount > spellsDict.Length) maxSkillCount = spellsDict.Length;
         
         for (int i = 0; i < maxSkillCount; i++) {
-            switch (skills[i]) {
+            Display.Options(spellsDict);
+            int input = Input.Select(spellsDict.Length, "spell", true);
+            
+            switch (spellsDict[input]) {
                 case "Zoltraak" :
                     mage.AddSkill(new Zoltraak(mage));
                     break;
@@ -83,32 +95,26 @@ public sealed class Custom {
                     mage.AddSkill(new RecoveryMagic(mage));
                     break;
             }
-            Console.WriteLine("Added " + skills[i] + " to " + mage.Name + "'s skills.");
+            Console.Write("Added " + spellsDict[i] + " to " + mage.Name + "'s skills.");
+            Console.ReadKey();
         }
     }
 
-    private void InitializeSkills(Warrior warrior) {
-        AddSkills(techniquesDict);
+    private void InitializeSkills(Warrior warrior, bool useMaxSkillCount) {
+        if (!useMaxSkillCount || maxSkillCount > spellsDict.Length) maxSkillCount = spellsDict.Length;
         
         for (int i = 0; i < maxSkillCount; i++) {
-            switch (skills[i]) {
+            Display.Options(techniquesDict);
+            int input = Input.Select(techniquesDict.Length, "technique", true);
+
+            switch (techniquesDict[input]) {
                 case "Lightning Strike" :
                     warrior.AddSkill(new LightningStrike(warrior));
                     break;
             }
-            Console.WriteLine("Added " + skills[i] + " to " + warrior.Name + "'s skills.");
+            Console.WriteLine("Added " + techniquesDict[i] + " to " + warrior.Name + "'s skills.");
         }
     }
     
-    private void InitializeSkills(Priest priest) { }
-
-    private void AddSkills(string[] skillsDict, bool useMaxSkillCount = true) {
-        if (!useMaxSkillCount || maxSkillCount > skillsDict.Length) maxSkillCount = skillsDict.Length;
-
-        for (int i = 0; i < maxSkillCount; i++) {
-            Display.Options(skillsDict);
-            int input = Input.Select(skillsDict.Length, "skill", true);
-            skills[i] = skillsDict[input];
-        }
-    }
+    private void InitializeSkills(Priest priest, bool useMaxSkillCount) { }
 }

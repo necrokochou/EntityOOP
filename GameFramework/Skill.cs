@@ -1,4 +1,7 @@
-﻿namespace EntityOOP.GameFramework;
+﻿using EntityOOP.Utils;
+
+
+namespace EntityOOP.GameFramework;
 
 
 public abstract class Skill {
@@ -59,12 +62,14 @@ public abstract class Skill {
         
         string skillType = GetType().BaseType.Name.ToLower();
         string skillAction = Owner.Name + " " + ActionString + pastTense + Name + " " + skillType;
-        Console.WriteLine(skillAction + " on " + Target.Name + ".");
+        Console.Write(skillAction + " on " + Target.Name + ".");
         string costType = ApplyCost();
-        Console.WriteLine(Owner.Name + " used " + Cost + " " + costType + ".");
+        Console.Write(Owner.Name + " used " + Cost + " " + costType + ".");
         SkillType();
         
         Target.Health.Display();
+            
+        Input.PressAnyKey();
     }
 
     protected abstract string ApplyCost();
@@ -72,6 +77,8 @@ public abstract class Skill {
     protected void SkillType() {
         if (DoesDamage) DoDamage();
         if (doesHealing) DoHeal();
+            
+        Input.PressAnyKey();
     }
 
     protected void DoDamage() {
@@ -81,6 +88,6 @@ public abstract class Skill {
 
     protected void DoHeal() {
         Target.Health.Increase(Heal);
-        Console.WriteLine(Target.Name + " gained " + Heal + " health.");   
+        Console.WriteLine(Target.Name + " gained " + Heal + " health.");
     }
 }

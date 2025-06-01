@@ -17,6 +17,11 @@ public sealed class Input {
 
 
     // METHODS
+    public static void PressAnyKey() {
+        Console.ReadKey();
+        Console.Clear();
+    }
+    
     public static int Read() {
         return int.Parse(Console.ReadLine());
     }
